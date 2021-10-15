@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{{title_tag}}</title>
+
+    <link rel="stylesheet" href="/{{css_sha}}.css" type="text/css" />
+    {{#each styles}}
+      <link rel="stylesheet" href="{{this}}" type="text/css" />
+    {{/each}}
+
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="{{rss}}" />
+
+    {{#each scripts}}
+      <script src="{{this}}" defer></script>
+    {{/each}}
+  </head>
+  <body class="{{bodyClass}}">
+    <script>
+      var ua = navigator.userAgent.toLowerCase();
+      if (ua.indexOf('safari') != -1) {
+        if (ua.indexOf('chrome') > -1) {
+          document.body.classList.add('chrome');
+        } else {
+          document.body.classList.add('safari');
+        }
+      }
+    </script>
+    <nav>
+      <a href="/"><img height="100" width="100" src="/img/avatar-200x200.jpg" /></a>
+      <h1><a href="/">shawn.dev</a></h1>
+    </nav>
+    <div id="content">
+      {{{content}}}
+    </div>
+  </body>
+</html>

@@ -1,0 +1,204 @@
+body {
+    font-family: "Avenir Next", "Avenir", "Helvetica Neue", "Helvetica", sans-serif;
+    background: #EFEFFF;
+    color: #333;
+    margin: 0;
+}
+
+a {
+    color: blue;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+nav {
+    position: absolute;
+    background: rgba(239, 239, 255, .6);
+    border-radius: 5px;
+    top: 8px;
+    left: 8px;
+    padding: .5em;
+}
+
+nav a,
+nav h1,
+nav ul,
+nav li {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+nav h1 {
+    margin-left: .3em;
+}
+
+nav li {
+    position: relative;
+    top: -.5em;
+    margin-left: 1em;
+}
+
+nav > a,
+nav img {
+    height: 2em;
+    width: 2em;
+}
+
+#content p,
+#content ul,
+#content ol,
+#content dl,
+#content blockquote {
+    width: 42em;
+    margin: 1em auto;
+    padding: 0 1em;
+}
+
+#content li p,
+#content li ul,
+#content li ol,
+#content li dl,
+#content li blockquote {
+    width: auto;
+    padding: 0;
+}
+
+#content ul#posts {
+    margin-top: 4em;
+    list-style-type: none;
+}
+
+@media all and (max-width: 47.826em) {
+    #content ul#posts {
+        margin-top: 2em;
+    }
+
+    #date {
+        display: none;
+    }
+
+    #post h1,
+    #post header h2 {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    #content header,
+    #content p,
+    #content ul,
+    #content ol,
+    #content dl,
+    #content blockquote {
+        width: auto;
+    }
+
+    #content header {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    nav {
+        position: static;
+        margin-top: 8px;
+        margin-left: 8px;
+    }
+
+    #content ul,
+    #content ol {
+        padding-left: 2em;
+        margin-left: 0;
+    }
+}
+
+@media all and (hover: none) {
+    .laptop-only {
+        display: none;
+    }
+}
+
+body:not(.safari) .safari-only {
+  display: none;
+}
+
+body:not(.chrome) .chrome-only {
+  display: none;
+}
+
+nav a {
+    color: black;
+}
+nav h1, nav img {
+    margin: 0;
+    padding: 0;
+}
+nav img {
+    border: 0;
+    border-radius: 7px;
+}
+
+#posts .title a {
+    font-size: 1.1em;
+    line-height: 1.2em;
+}
+
+#posts .subtitle {
+  font-size: 0.9em;
+  font-style: italic;
+}
+
+#posts .date,
+#posts .year {
+    display: none;
+}
+
+#posts .new-year .year {
+    display: block;
+    margin-left: -1.5em;
+    margin-top: 2.4em;
+    margin-bottom: .8em;
+}
+
+#posts li:first-child .year {
+    margin-top: 0;
+}
+
+#date {
+    color: #AAAAAA;
+}
+
+#date {
+     position: absolute;
+     right: 2em;
+}
+
+#posts li {
+    padding-bottom: 0.8em;
+}
+
+#post h1,
+#post h2,
+#post h3,
+#post h4,
+#post h5 {
+    text-align: center;
+}
+
+#post header h2 {
+    font-style: italic;
+}
+
+#post header h2::first-letter {
+    text-transform: uppercase;
+}
+
+#post article {
+    font-size: 1.06em;
+    line-height: 1.7;
+}
+
+header {
+    margin-top: 8px;
+}
