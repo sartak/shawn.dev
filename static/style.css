@@ -51,6 +51,10 @@ nav img {
   background-color: rgb(161, 132, 125);
 }
 
+nav a:hover {
+  text-decoration: none;
+}
+
 #content p,
 #content ul,
 #content ol,
