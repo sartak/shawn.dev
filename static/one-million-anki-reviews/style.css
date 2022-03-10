@@ -1,0 +1,55 @@
+div.plotly-notifier {
+  visibility: hidden;
+}
+
+div.chart,
+div.chart > div {
+  height: 450px;
+}
+
+div.chart .js-plotly-plot .plotly .cursor-pointer {
+  cursor: crosshair;
+}
+
+.card {
+  text-align: center;
+  margin: 1.5em auto;
+}
+
+.card hr {
+  width: 42em;
+  border: 0px solid #333;
+  border-top-width: 1px;
+}
+
+.card .text {
+  font-size: 1.3em;
+}
+
+.card img {
+  width: 42em;
+  height: calc((675 / 1200) * 42em);
+  background-color: rgb(108, 150, 133);
+}
+
+.chart .loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media all and (max-width: 47.826em) {
+  .card hr {
+    width: 100vw;
+  }
+
+  .card img {
+    width: 100vw;
+    height: calc((675 / 1200) * 100vw);
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+

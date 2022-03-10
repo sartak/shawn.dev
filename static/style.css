@@ -51,7 +51,8 @@ nav img {
 #content ul,
 #content ol,
 #content dl,
-#content blockquote {
+#content blockquote,
+#content .chart {
     width: 42em;
     margin: 1em auto;
     padding: 0 1em;
@@ -91,8 +92,16 @@ nav img {
     #content ul,
     #content ol,
     #content dl,
-    #content blockquote {
+    #content blockquote,
+    #content .chart {
         width: auto;
+    }
+
+    #content .chart {
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: 0;
+      padding-right: 0;
     }
 
     #content header {
