@@ -225,6 +225,7 @@ sub generate_article {
 
     $article->{title_tag} = $article->{title};
     $article->{title_tag} =~ s/<.*?>//g;
+    $article->{title_tag} .= " - shawn.dev";
     my $html = fill_in($layout{en}, $article);
 
     make_path "$outdir/$article->{dir}";
