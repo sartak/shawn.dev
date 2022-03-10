@@ -47,6 +47,10 @@ nav img {
     width: 2em;
 }
 
+nav img {
+  background-color: rgb(161, 132, 125);
+}
+
 #content p,
 #content ul,
 #content ol,

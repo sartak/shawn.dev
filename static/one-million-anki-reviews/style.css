@@ -28,8 +28,8 @@ div.chart .js-plotly-plot .plotly .cursor-pointer {
 
 .card img {
   width: 42em;
-  height: calc((675 / 1200) * 42em);
-  background-color: rgb(108, 150, 133);
+  height: calc((2160 / 3840) * 42em);
+  background-color: rgb(104, 144, 124);
 }
 
 .chart .loading {
@@ -45,7 +45,7 @@ div.chart .js-plotly-plot .plotly .cursor-pointer {
 
   .card img {
     width: 100vw;
-    height: calc((675 / 1200) * 100vw);
+    height: calc((2160 / 3840) * 100vw);
     margin-left: 0;
     margin-right: 0;
     padding-left: 0;
