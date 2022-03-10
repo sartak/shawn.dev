@@ -1,4 +1,5 @@
 #!/usr/bin/env perl
+use utf8;
 use strict;
 use warnings;
 use File::Slurp 'slurp';
@@ -333,10 +334,13 @@ sub generate_rss {
           $title .= " ($article->{subtitle})";
         }
 
+        my $description = decode_utf8($article->{original} || $article->{description});
+        $description =~ s!\bloading…!(This bit of content likely won't show up in your reader, please visit the <a href="$article->{url}">article</a> in your browser.)!g;
+
         $feed->add_item(
             title       => decode_utf8($title),
             link        => $article->{url},
-            description => decode_utf8($article->{original} || $article->{description}),
+            description => $description,
             permaLink   => $article->{url},
             dc          => {
                 date    => $article->{date},
