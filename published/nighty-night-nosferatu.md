@@ -1,6 +1,7 @@
 title: Nighty Night, Nosferatu
 subtitle: my Ludum Dare 50 game
 date: 2022-04-11
+bodyClass: natural
 @styles: /nighty-night-nosferatu/static/css/main.55b319db.chunk.css
 @scripts: /nighty-night-nosferatu/illuminated.js
 @scripts: /nighty-night-nosferatu/static/wrapper.js

@@ -1,6 +1,7 @@
 title: Boids of Prey
 subtitle: my Ludum Dare 46 game
 date: 2020-04-21
+bodyClass: natural
 @styles: /boids-of-prey/static/css/main.f58af37a.chunk.css
 @scripts: /boids-of-prey/static/wrapper.js
 @scripts: /boids-of-prey/static/js/2.ca810ec6.chunk.js
