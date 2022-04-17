@@ -13,7 +13,7 @@ Since then, my use of Anki has grown to studying a third language, the board gam
 My millionth review was for the Japanese sentence below. (The screenshot has the sentence in it, on the right-hand side, but the low contrast makes it hard to read). Having the source image right in the card makes a _huge_ difference; it's more interesting and gives loads of context to connect the dots. I could fill several articles about how I do sentence mining nowadays. The short version is I've been putting together a personal study app that has 2.5 million OCR'd sentences across &gt;90gb of photos from travel, images of video games, scans of manga, etc. It all started with the Switch having a hardware screenshot button…
 
 <div class="card">
-  <img src="https://shawn.dev/one-million-anki-reviews/ff7r.jpg" />
+  <img src="https://shawn-dev.onrender.com/one-million-anki-reviews/ff7r.jpg" />
   <div class="text">『ザンガン流精神統一』が発動した</div>
   <hr />
   <div class="text">流【りゅう】</div>
