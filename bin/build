@@ -1,0 +1,9 @@
+#!/bin/bash
+echo whoami
+curl -L https://cpanmin.us/ -o cpanm
+chmod +x cpanm
+./cpanm --notest --local-lib=~/perl5 local::lib && eval $(perl -I ~/perl5/lib/perl5/ -Mlocal::lib)
+./cpanm --notest File::Slurp Text::MultiMarkdown Text::Handlebars XML::RSS
+
+mkdir -p generated/drafts
+perl bin/generate.pl generated 'https://shawn-dev.onrender.com' 'shawn.dev on Render'
