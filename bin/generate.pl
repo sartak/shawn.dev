@@ -13,6 +13,8 @@ use List::MoreUtils 'uniq';
 
 my $title = 'Shawn M Moore';
 my $outdir = shift || 'generated';
+my $base = shift || 'https://shawn.dev';
+my $site = shift || 'shawn.dev';
 
 make_path $outdir unless -d $outdir;
 
@@ -187,7 +189,7 @@ while (my $file = glob("published/* writing/*")) {
 
     $article->{basename} ||= titleify($article->{title});
     $article->{file} = $article->{dir} . $article->{basename} . '.html';
-    $article->{url} = $article->{external} || "https://shawn.dev/$article->{file}";
+    $article->{url} = $article->{external} || "$base/$article->{file}";
 
     if ($article->{external}) {
         $article->{description} = qq{<p>This article was published at <a href="$article->{external}"</a></p>};
@@ -225,7 +227,7 @@ sub generate_article {
 
     $article->{title_tag} = $article->{title};
     $article->{title_tag} =~ s/<.*?>//g;
-    $article->{title_tag} .= " - shawn.dev";
+    $article->{title_tag} .= " - $site";
     my $html = fill_in($layout{en}, $article);
 
     make_path "$outdir/$article->{dir}";
@@ -275,7 +277,7 @@ sub generate_index {
     print $handle fill_in($layout{en}, {
         content   => $posts,
         title     => $title,
-        title_tag => 'shawn.dev',
+        title_tag => $site,
         index     => 1,
     });
 }
@@ -305,7 +307,7 @@ sub generate_drafts {
     print $handle fill_in($layout{en}, {
         content   => $posts,
         title     => $title,
-        title_tag => 'shawn.dev',
+        title_tag => $site,
     });
 }
 
@@ -315,7 +317,7 @@ sub generate_rss {
     my $feed = XML::RSS->new(version => '2.0');
     $feed->channel(
         title => $title,
-        link  => 'https://shawn.dev',
+        link  => $base,
     );
 
     my @articles;
