@@ -4,6 +4,7 @@ body {
   background: #efefff;
   color: #333;
   margin: 0;
+  hanging-punctuation: first allow-end last;
 }
 
 a {
