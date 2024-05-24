@@ -15,6 +15,19 @@ div.chart .js-plotly-plot .plotly .cursor-pointer {
   text-align: center;
   margin: 1.5em auto;
   width: 42em;
+  overflow: hidden;
+  padding-bottom: 0.5em;
+  border-radius: 16px;
+}
+
+.card {
+  background: rgb(229, 229, 245);
+}
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: rgb(33, 34, 42);
+  }
 }
 
 #content .card p {
@@ -37,6 +50,7 @@ div.chart .js-plotly-plot .plotly .cursor-pointer {
 @media all and (max-width: 47.826em) {
   .card {
     width: 100vw;
+    border-radius: 0;
   }
 
   .card hr {
