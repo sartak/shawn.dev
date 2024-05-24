@@ -6,7 +6,7 @@ date: 2022-03-09
 
 Today, I hit one million reviews in Anki. One **million**!
 
-I started using spaced repetition back in 2009 to learn the kanji. My very first review was for the kanji meaning "one", which looks like this: 一
+I started using spaced repetition back in 2009 to learn the kanji. My very first review was for the kanji meaning "one", which looks like <span class="hang">this: 一</span>
 
 Since then, my use of Anki has grown to studying a third language, the board game Go, and other bits of miscellany. I've also tried to use SRS for non-memorization tasks, like reminding me of meaningful quotes, but never quite got that to work.
 

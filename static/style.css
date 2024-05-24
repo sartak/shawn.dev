@@ -226,6 +226,10 @@ hr {
   }
 }
 
+.hang {
+  display: inline-block;
+}
+
 /* light mode */
 body {
   background: #EFEFFF;
