@@ -275,12 +275,12 @@ sub generate_index {
     my $file = "$outdir/index.html";
 
     open my $handle, '>', $file;
-    print $handle fill_in($layout{en}, {
+    print $handle encode_utf8(fill_in($layout{en}, {
         content   => $posts,
         title     => $title,
         title_tag => $site,
         index     => 1,
-    });
+    }));
 }
 
 sub generate_drafts {
