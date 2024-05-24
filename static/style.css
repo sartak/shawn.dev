@@ -22,21 +22,13 @@ nav {
 }
 
 nav a,
-nav h1,
-nav ul,
-nav li {
+nav h1 {
   display: inline-block;
   vertical-align: middle;
 }
 
 nav h1 {
   margin-left: 0.3em;
-}
-
-nav li {
-  position: relative;
-  top: -0.5em;
-  margin-left: 1em;
 }
 
 nav>a,
@@ -51,22 +43,10 @@ nav a:hover {
 
 #content p,
 #content ul,
-#content ol,
-#content dl,
-#content blockquote,
 #content .chart {
   width: 42em;
   margin: 1em auto;
   padding: 0 1em;
-}
-
-#content li p,
-#content li ul,
-#content li ol,
-#content li dl,
-#content li blockquote {
-  width: auto;
-  padding: 0;
 }
 
 #content ul#posts {
@@ -92,9 +72,6 @@ nav a:hover {
   #content header,
   #content p,
   #content ul,
-  #content ol,
-  #content dl,
-  #content blockquote,
   #content .chart {
     width: auto;
   }
@@ -117,8 +94,7 @@ nav a:hover {
     margin-left: 8px;
   }
 
-  #content ul,
-  #content ol {
+  #content ul {
     padding-left: 2em;
     margin-left: 0;
   }
@@ -230,7 +206,6 @@ hr {
   display: inline-block;
 }
 
-/* light mode */
 body {
   background: #EFEFFF;
   color: #333333;
