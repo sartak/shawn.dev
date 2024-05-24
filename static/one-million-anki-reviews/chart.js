@@ -20,10 +20,21 @@ document.addEventListener("DOMContentLoaded", function () {
   var revsContainer = document.getElementById("revs");
   revsContainer.innerHTML = "";
   revsContainer.classList.remove("loading");
-  Plotly.newPlot(revsContainer, revsTraces, revsLayout, config);
+  var revsPlot = Plotly.newPlot(revsContainer, revsTraces, revsLayout, config);
 
   var cardsContainer = document.getElementById("cards");
   cardsContainer.innerHTML = "";
   cardsContainer.classList.remove("loading");
-  Plotly.newPlot(cardsContainer, cardsTraces, cardsLayout, config);
+  var cardsPlot = Plotly.newPlot(cardsContainer, cardsTraces, cardsLayout, config);
+
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
+    var idx = window.matchMedia('(prefers-color-scheme: dark)').matches ? 1 : 0;
+    var promises = [revsPlot, cardsPlot];
+    for (let i = 0; i < promises.length; i++) {
+      promises[i].then((div) => {
+        Plotly.relayout(div, {"paper_bgcolor":colors[0][idx],"plot_bgcolor":colors[0][idx],"font.color":colors[1][idx],"yaxis2.gridcolor":colors[2][idx]});
+        Plotly.restyle(div, {"marker.color":colors[1][idx]}, 10);
+      });
+    }
+  });
 });
