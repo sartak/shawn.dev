@@ -190,7 +190,7 @@ while (my $file = glob("published/* writing/*")) {
 
     $article->{basename} ||= titleify($article->{title});
     $article->{file} = $article->{dir} . $article->{basename} . '.html';
-    $article->{url} = $article->{external} || "$base/$article->{file}";
+    $article->{url} = $article->{external} || "/$article->{file}";
 
     if ($article->{external}) {
         $article->{description} = qq{<p>This article was published at <a href="$article->{external}"</a></p>};
