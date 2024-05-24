@@ -14,12 +14,12 @@ My millionth review was for the Japanese sentence below. (The screenshot has the
 
 <div class="card">
   <img src="https://shawn.dev/one-million-anki-reviews/ff7r.jpg" />
-  <div class="text">『ザンガン流精神統一』が発動した</div>
+  <p>『ザンガン流精神統一』が発動した</p>
   <hr />
-  <div class="text">流【りゅう】</div>
-  <div class="text">精神【せいしん】</div>
-  <div class="text">統一【とういつ】</div>
-  <div class="text">発動【はつどう】</div>
+  <p>流【りゅう】</p>
+  <p>精神【せいしん】</p>
+  <p>統一【とういつ】</p>
+  <p>発動【はつどう】</p>
 </div>
 
 The beauty of spaced repetition is that the average time between reviews for any particular card in my deck is _1.85 years_. Exponential growth catches up to you real fast.

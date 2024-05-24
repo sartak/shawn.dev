@@ -14,14 +14,12 @@ div.chart .js-plotly-plot .plotly .cursor-pointer {
 .card {
   text-align: center;
   margin: 1.5em auto;
-}
-
-.card hr {
   width: 42em;
 }
 
-.card .text {
-  font-size: 1.3em;
+#content .card p {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .card img {
@@ -37,6 +35,10 @@ div.chart .js-plotly-plot .plotly .cursor-pointer {
 }
 
 @media all and (max-width: 47.826em) {
+  .card {
+    width: 100vw;
+  }
+
   .card hr {
     width: 80vw;
   }
