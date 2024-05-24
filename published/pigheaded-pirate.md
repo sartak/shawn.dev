@@ -1,5 +1,6 @@
 title: Pigheaded Pirate
 subtitle: my Ludum Dare 43 game
+description: Pigheaded Pirate is a sidescrolling beat-em-up with a twist: your weapon is your partner. Sacrifice them to complete three progressively harder levels for treasure and an important lesson about life, money, and love.
 date: 2018-12-30
 @scripts: /phaser-3.15.1.min.js
 @scripts: /pigheaded-pirate/game.js

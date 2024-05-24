@@ -1,5 +1,6 @@
 title: One million Anki reviews
 date: 2022-03-09
+description: Reflections and stats after hitting one million flash card reviews in Anki for studying Japanese, Chinese, Go, and more.
 @styles: /one-million-anki-reviews/style.css
 @scripts: /one-million-anki-reviews/plotly-2.9.0.min.js
 @scripts: /one-million-anki-reviews/chart.js

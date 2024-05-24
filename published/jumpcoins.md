@@ -1,5 +1,6 @@
 title: Jumpcoins
 subtitle: my Ludum Dare 44 game
+description: Jumpcoins is an action platformer. Play through 20 levels dodging spikes, enemies and collecting coins to power up your special jumps. Collect all the badges while threading together a combination of double jumps and walljumps, and beat your best times.
 date: 2019-05-02
 @scripts: /phaser-3.15.1.min.js
 @scripts: /jumpcoins/game.js

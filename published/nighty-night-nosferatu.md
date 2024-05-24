@@ -1,5 +1,6 @@
 title: Nighty Night, Nosferatu
 subtitle: my Ludum Dare 50 game
+description: Nighty Night, Nosferatu is an action platformer where you must survive each bitter sunrise. Lurk in the shadows to delay your inevitable doom.
 date: 2022-04-11
 bodyClass: natural
 @styles: /nighty-night-nosferatu/static/css/main.55b319db.chunk.css

@@ -192,10 +192,6 @@ while (my $file = glob("published/* writing/*")) {
     $article->{file} = $article->{dir} . $article->{basename} . '.html';
     $article->{url} = $article->{external} || "/$article->{file}";
 
-    if ($article->{external}) {
-        $article->{description} = qq{<p>This article was published at <a href="$article->{external}"</a></p>};
-    }
-
     push @{ $articles{ $article->{date} } }, $article;
 }
 
@@ -276,10 +272,11 @@ sub generate_index {
 
     open my $handle, '>', $file;
     print $handle encode_utf8(fill_in($layout{en}, {
-        content   => $posts,
-        title     => $title,
-        title_tag => $site,
-        index     => 1,
+        content     => $posts,
+        title       => $title,
+        title_tag   => $site,
+        description => "The personal blog of Shawn M Moore, covering software engineering, game development, linguistics, productivity, learning, and more.",
+        index       => 1,
     }));
 }
 
