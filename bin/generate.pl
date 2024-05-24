@@ -33,6 +33,7 @@ sub prettify_date {
     my $date = shift;
 
     my ($y, $m, $d) = split '-', $date;
+    $d =~ s/^0//;
 
     return "$months[$m] $d, $y";
 }
