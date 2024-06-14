@@ -24,6 +24,8 @@ actions(
     env(
       BASE_URL => 'https://shawn.dev',
       SITE_NAME => 'shawn.dev',
+      SITE_TITLE => 'shawn.dev',
+      FEED_TITLE => 'Shawn M Moore',
     ),
     cmd('./bin/generate.pl'),
   ],

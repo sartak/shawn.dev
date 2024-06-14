@@ -11,10 +11,11 @@ use Text::Handlebars;
 use Unicode::Normalize qw/NFD NFC/;
 use List::MoreUtils 'uniq';
 
-my $title = 'Shawn M Moore';
 my $outdir = 'generated';
 my $base = $ENV{BASE_URL} or die "missing BASE_URL";
 my $site = $ENV{SITE_NAME} or die "missing SITE_NAME";
+my $site_title = $ENV{SITE_TITLE} or die "missing SITE_TITLE";
+my $feed_title = $ENV{FEED_TITLE} or die 'Shawn M Moore';
 
 make_path $outdir unless -d $outdir;
 
@@ -140,6 +141,7 @@ sub fill_in {
     $vars->{rss} ||= '/rss.xml';
     $vars->{css_sha} ||= $css_sha
         or die "No CSS sha yet??";
+    $vars->{site_title} ||= $site_title;
 
     return $hbs->render_string($template, $vars);
 }
