@@ -275,7 +275,6 @@ sub generate_index {
     open my $handle, '>', $file;
     print $handle encode_utf8(fill_in($layout{en}, {
         content     => $posts,
-        title       => $title,
         title_tag   => $site,
         description => "The personal blog of Shawn M Moore, covering software engineering, game development, linguistics, productivity, learning, and more.",
         index       => 1,
@@ -306,7 +305,6 @@ sub generate_drafts {
     open my $handle, '>', "$outdir/drafts/index.html";
     print $handle fill_in($layout{en}, {
         content   => $posts,
-        title     => $title,
         title_tag => $site,
     });
 }
@@ -316,7 +314,7 @@ sub generate_rss {
 
     my $feed = XML::RSS->new(version => '2.0');
     $feed->channel(
-        title => $title,
+        title => $feed_title,
         link  => $base,
     );
 
