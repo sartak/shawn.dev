@@ -47,6 +47,7 @@ nav a:hover {
   width: 42em;
   margin: 1em auto;
   padding: 0 1em;
+  text-wrap: pretty;
 }
 
 #content ul#posts {
