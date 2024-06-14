@@ -11,7 +11,7 @@ use Text::Handlebars;
 use Unicode::Normalize qw/NFD NFC/;
 use List::MoreUtils 'uniq';
 
-my $outdir = 'generated';
+my $outdir = $ENV{OUTDIR} or die "missing OUTDIR";
 my $base = $ENV{BASE_URL} or die "missing BASE_URL";
 my $site = $ENV{SITE_NAME} or die "missing SITE_NAME";
 my $site_title = $ENV{SITE_TITLE} or die "missing SITE_TITLE";

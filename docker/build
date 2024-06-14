@@ -4,6 +4,10 @@ use warnings;
 use Mana::Docker;
 
 getopt({
+  outdir => {
+    flag => 'outdir',
+    default => 'generated',
+  },
   destination => {
     flag    => 'destination',
     default => '/var/www/blog.shawn.zone',
@@ -22,6 +26,7 @@ actions(
       '.' => '/app',
     ),
     env(
+      OUTDIR => $ARGV{outdir},
       BASE_URL => 'https://shawn.dev',
       SITE_NAME => 'shawn.dev',
       SITE_TITLE => 'shawn.dev',
@@ -31,7 +36,7 @@ actions(
   ],
   ($ARGV{is_devel} ? () : (
     exec => ['mv', $ARGV{destination}, $tempDir],
-    exec => ['mv', 'generated', $ARGV{destination}],
+    exec => ['mv', $ARGV{outdir}, $ARGV{destination}],
     exec => [['rm', '-r'], $tempDir],
   )),
 );
