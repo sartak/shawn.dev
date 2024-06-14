@@ -21,6 +21,10 @@ actions(
     mount(
       '.' => '/app',
     ),
+    env(
+      BASE_URL => 'https://shawn.dev',
+      SITE_NAME => 'shawn.dev',
+    ),
     cmd('./bin/generate.pl'),
   ],
   ($ARGV{is_devel} ? () : (

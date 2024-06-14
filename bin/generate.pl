@@ -12,9 +12,9 @@ use Unicode::Normalize qw/NFD NFC/;
 use List::MoreUtils 'uniq';
 
 my $title = 'Shawn M Moore';
-my $outdir = shift || 'generated';
-my $base = shift || 'https://shawn.dev';
-my $site = shift || 'shawn.dev';
+my $outdir = 'generated';
+my $base = $ENV{BASE_URL} or die "missing BASE_URL";
+my $site = $ENV{SITE_NAME} or die "missing SITE_NAME";
 
 make_path $outdir unless -d $outdir;
 
