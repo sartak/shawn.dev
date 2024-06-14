@@ -18,6 +18,7 @@ my $site_title = $ENV{SITE_TITLE} or die "missing SITE_TITLE";
 my $feed_title = $ENV{FEED_TITLE} or die 'Shawn M Moore';
 
 make_path $outdir unless -d $outdir;
+make_path "$outdir/drafts" unless -d "$outdir/drafts";
 
 my %layout = (
     en => scalar(slurp 'layout.en.html'),
