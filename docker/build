@@ -1,0 +1,31 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use Mana::Docker;
+
+getopt({
+  destination => {
+    flag    => 'destination',
+    default => '/var/www/blog.shawn.zone',
+  },
+}, {
+  image => 'blog-frontend',
+  rm => 1,
+});
+
+my $tempDir = "/tmp/blog-frontend-$$";
+
+actions(
+  'build',
+  run => [
+    mount(
+      '.' => '/app',
+    ),
+    cmd('./bin/generate.pl'),
+  ],
+  ($ARGV{is_devel} ? () : (
+    exec => ['mv', $ARGV{destination}, $tempDir],
+    exec => ['mv', 'generated', $ARGV{destination}],
+    exec => [['rm', '-r'], $tempDir],
+  )),
+);
