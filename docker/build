@@ -3,30 +3,36 @@ use strict;
 use warnings;
 use Mana::Docker;
 
+my $tempDir = "/tmp/blog-frontend-$$";
+mkdir($tempDir);
+mkdir("$tempDir/new");
+
 getopt({
-  outdir => {
-    flag => 'outdir',
-    default => 'generated',
-  },
   destination => {
-    flag    => 'destination',
-    default => '/var/www/blog.shawn.zone',
+    flag    => 'destination=s',
+    dir     => 1,
+    default => sub {
+      if ($ARGV{is_devel}) {
+        return '/var/www/blog.dev.shawn.zone';
+      } else {
+        return '/var/www/blog.shawn.zone';
+      }
+    },
   },
 }, {
   image => 'blog-frontend',
   rm => 1,
 });
 
-my $tempDir = "/tmp/blog-frontend-$$";
-
 actions(
   'build',
   run => [
     mount(
       '.' => '/app',
+      "$tempDir/new" => '/out',
     ),
     env(
-      OUTDIR => $ARGV{outdir},
+      OUTDIR => "/out",
       BASE_URL => 'https://shawn.dev',
       SITE_NAME => 'shawn.dev',
       SITE_TITLE => 'shawn.dev',
@@ -34,9 +40,7 @@ actions(
     ),
     cmd('./bin/generate.pl'),
   ],
-  ($ARGV{is_devel} ? () : (
-    exec => ['mv', $ARGV{destination}, $tempDir],
-    exec => ['mv', $ARGV{outdir}, $ARGV{destination}],
-    exec => [['rm', '-r'], $tempDir],
-  )),
+  exec => ['sudo', 'mv', $ARGV{destination}, "$tempDir/old"],
+  exec => ['sudo', 'mv', "$tempDir/new", $ARGV{destination}],
+  exec => ['sudo', 'rm', '-r', $tempDir],
 );
