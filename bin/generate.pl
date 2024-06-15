@@ -72,6 +72,7 @@ sub read_content {
 sub new_article {
     my $content = shift;
     my $file    = shift;
+    my $draft   = shift;
 
     my %headers;
     while ($content =~ s/^(@?)(\w+): (.+)\n//) {
@@ -85,9 +86,10 @@ sub new_article {
     }
 
     $headers{original} = $content;
+    $headers{draft} = $draft;
 
     if (!$headers{date}) {
-        warn "No date for $headers{title}!" if !$headers{draft};
+        warn "No date for $headers{title}!" if !$draft;
         my (undef,undef,undef,$day,$mon,$year) = localtime((stat($file))[9]);
         $mon++;
         $year += 1900;
@@ -180,11 +182,12 @@ generate_css();
 my %articles;
 
 while (my $file = glob("published/* writing/*")) {
+    my $draft = $file =~ m{^writing/};
     my $content = read_content($file);
-    my $article = new_article($content, $file);
+    my $article = new_article($content, $file, $draft);
     next if $article->{skip};
 
-    if ($article->{draft}) {
+    if ($draft) {
         $article->{dir} = 'drafts/';
     }
     else {
