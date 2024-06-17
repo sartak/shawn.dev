@@ -55,11 +55,7 @@ nav a:hover {
   list-style-type: none;
 }
 
-@media all and (max-width: 47.826em) {
-  #content ul#posts {
-    margin-top: 2em;
-  }
-
+@media all and (max-width: 70em) {
   #date {
     display: none;
   }
@@ -70,7 +66,24 @@ nav a:hover {
     margin-right: 1rem;
   }
 
-  #content header,
+  #content header {
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  nav {
+    position: static;
+    margin-top: 8px;
+    margin-left: 8px;
+  }
+}
+
+@media all and (max-width: 47.826em) {
+  #content ul#posts {
+    margin-top: 2em;
+  }
+
   #content p,
   #content ul,
   #content .chart {
@@ -82,17 +95,6 @@ nav a:hover {
     margin-right: 0;
     padding-left: 0;
     padding-right: 0;
-  }
-
-  #content header {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  nav {
-    position: static;
-    margin-top: 8px;
-    margin-left: 8px;
   }
 
   #content ul {
