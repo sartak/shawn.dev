@@ -53,7 +53,7 @@ sub read_content_md {
     $md =~ s{<\s*p\s*>\s*<\s*figure}{<figure}gi;
     $md =~ s{<\s*/\s*figure\s*>\s*<\s*/\s*p\s*>}{</figure>}gi;
 
-    $md =~ s{<a }{<a target="_blank" }g;
+    $md =~ s{<a ([^>]*\bhref="[^#])}{<a target="_blank" $1}g;
 
     return $headers . $md;
 }
