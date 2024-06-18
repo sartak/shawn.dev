@@ -44,8 +44,11 @@ sub read_content_md {
     my $file = shift;
     my $content = slurp $file;
 
-    my $headers;
+    my $headers = '';
     $headers .= $1 while $content =~ s/^(@?\w+: .+\n)//;
+
+    my $style = '';
+    $style .= $1 while $content =~ s{(<style[^>]*>.*?</style>)}{}s;
 
     my $md = markdown($content);
 
@@ -55,7 +58,7 @@ sub read_content_md {
 
     $md =~ s{<a ([^>]*\bhref="[^#])}{<a target="_blank" $1}g;
 
-    return $headers . $md;
+    return $headers . $style . $md;
 }
 
 sub read_content {
