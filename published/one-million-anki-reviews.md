@@ -1,9 +1,69 @@
 title: One million Anki reviews
 date: 2022-03-09
 description: Reflections and stats after hitting one million flash card reviews in Anki for studying Japanese, Chinese, Go, and more.
-@styles: /one-million-anki-reviews/style.css
 @scripts: /one-million-anki-reviews/plotly-2.9.0.min.js
 @scripts: /one-million-anki-reviews/chart.js
+
+<style>
+div.plotly-notifier {
+  visibility: hidden;
+}
+div.chart,
+div.chart>div {
+  height: 450px;
+}
+div.chart .js-plotly-plot .plotly .cursor-pointer {
+  cursor: crosshair;
+}
+.card {
+  text-align: center;
+  margin: 1.5em auto;
+  width: 42rem;
+  overflow: hidden;
+  padding-bottom: 0.5em;
+  border-radius: 16px;
+}
+.card {
+  background: rgb(229, 229, 245);
+}
+@media (prefers-color-scheme: dark) {
+  .card {
+    background: rgb(33, 34, 42);
+  }
+}
+#content .card p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+#content .card img {
+  height: calc((2160 / 3840) * 42rem);
+  background-color: rgb(104, 144, 124);
+  border-radius: 0;
+}
+.chart .loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@media all and (max-width: 47.826em) {
+  .card {
+    width: 100vw;
+    border-radius: 0;
+  }
+  .card hr {
+    width: 80vw;
+  }
+  #content .card img {
+    max-width: none;
+    width: 100vw;
+    height: calc((2160 / 3840) * 100vw);
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+</style>
 
 Today, I hit one million reviews in Anki. One **million**!
 
