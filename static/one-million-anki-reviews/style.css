@@ -14,7 +14,7 @@ div.chart .js-plotly-plot .plotly .cursor-pointer {
 .card {
   text-align: center;
   margin: 1.5em auto;
-  width: 42em;
+  width: 42rem;
   overflow: hidden;
   padding-bottom: 0.5em;
   border-radius: 16px;
@@ -35,10 +35,10 @@ div.chart .js-plotly-plot .plotly .cursor-pointer {
   margin-bottom: 0;
 }
 
-.card img {
-  width: 42em;
-  height: calc((2160 / 3840) * 42em);
+#content .card img {
+  height: calc((2160 / 3840) * 42rem);
   background-color: rgb(104, 144, 124);
+  border-radius: 0;
 }
 
 .chart .loading {
@@ -57,7 +57,8 @@ div.chart .js-plotly-plot .plotly .cursor-pointer {
     width: 80vw;
   }
 
-  .card img {
+  #content .card img {
+    max-width: none;
     width: 100vw;
     height: calc((2160 / 3840) * 100vw);
     margin-left: 0;
