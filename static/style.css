@@ -43,11 +43,31 @@ nav a:hover {
 
 #content p,
 #content ul,
+#content article h2,
+#content h3,
+#content h4,
+#content h5,
 #content .chart {
-  width: 42em;
-  margin: 1em auto;
+  width: 42rem;
   padding: 0 1em;
+  margin-left: auto;
+  margin-right: auto;
   text-wrap: pretty;
+}
+
+#content p,
+#content ul,
+#content .chart {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+#content article h2,
+#content h3,
+#content h4,
+#content h5 {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
 }
 
 #content ul#posts {
@@ -86,6 +106,10 @@ nav a:hover {
 
   #content p,
   #content ul,
+  #content article h2,
+  #content h3,
+  #content h4,
+  #content h5,
   #content .chart {
     width: auto;
   }
