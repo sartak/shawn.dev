@@ -11,6 +11,8 @@ use Text::Handlebars;
 use Unicode::Normalize qw/NFD NFC/;
 use List::MoreUtils 'uniq';
 
+binmode STDERR, ':utf8';
+
 my $outdir = $ENV{OUTDIR} or die "missing OUTDIR";
 my $base = $ENV{BASE_URL} or die "missing BASE_URL";
 my $site = $ENV{SITE_NAME} or die "missing SITE_NAME";
@@ -373,3 +375,17 @@ sub generate {
 }
 
 generate();
+
+if ($ENV{WATCH}) {
+  require File::ChangeNotify;
+  my $watcher = File::ChangeNotify->instantiate_watcher(
+    directories => [qw(published writing static)],
+  );
+
+  warn "Watching for changes…\n";
+  while (1) {
+    $watcher->wait_for_events();
+    warn "Regenerating…\n";
+    generate();
+  }
+}

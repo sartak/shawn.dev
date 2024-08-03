@@ -19,6 +19,9 @@ getopt({
       }
     },
   },
+  watch => {
+    flag => 'watch',
+  },
 }, {
   image => 'blog-frontend',
   rm => 1,
@@ -29,7 +32,7 @@ actions(
   run => [
     mount(
       '.' => '/app',
-      "$tempDir/new" => '/out',
+      $ARGV{watch} ? ($ARGV{destination} => '/out') : ("$tempDir/new" => '/out'),
     ),
     env(
       OUTDIR => "/out",
@@ -37,10 +40,14 @@ actions(
       SITE_NAME => 'shawn.dev',
       SITE_TITLE => 'shawn.dev',
       FEED_TITLE => 'Shawn M Moore',
+      ($ARGV{watch} ? (WATCH => 1) : ()),
     ),
     cmd('./bin/generate.pl'),
   ],
-  exec => ['sudo', 'mv', $ARGV{destination}, "$tempDir/old"],
-  exec => ['sudo', 'mv', "$tempDir/new", $ARGV{destination}],
-  exec => ['sudo', 'rm', '-r', $tempDir],
+  ($ARGV{watch} ? (
+  ) : (
+    exec => ['sudo', 'mv', $ARGV{destination}, "$tempDir/old"],
+    exec => ['sudo', 'mv', "$tempDir/new", $ARGV{destination}],
+    exec => ['sudo', 'rm', '-r', $tempDir],
+  )),
 );
