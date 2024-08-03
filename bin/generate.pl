@@ -319,7 +319,8 @@ sub generate_static {
 }
 
 sub gather_files {
-  glob("published/* writing/*")
+  my @files = grep { !/~$/ } glob("published/* writing/*");
+  return @files;
 }
 
 sub gather_articles {
