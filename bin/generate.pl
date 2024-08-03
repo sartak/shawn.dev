@@ -29,7 +29,11 @@ my @months = qw/
     August September October November December
 /;
 
-my $css_sha;
+my $hbs = Text::Handlebars->new(
+    helpers => {
+        now => sub { scalar gmtime },
+    },
+);
 
 sub prettify_date {
     my $date = shift;
@@ -76,8 +80,8 @@ sub new_article {
     my $content = shift;
     my $file    = shift;
     my $draft   = shift;
+    my %headers = %{ shift() };
 
-    my %headers;
     while ($content =~ s/^(@?)(\w+): (.+)\n//) {
       my ($array, $header, $value) = ($1, $2, $3);
       if ($array) {
@@ -134,20 +138,9 @@ sub new_article {
     return \%headers;
 }
 
-my $hbs = Text::Handlebars->new(
-    helpers => {
-        now => sub { scalar gmtime },
-    },
-);
-
 sub fill_in {
     my $template = shift;
     my $vars     = shift;
-
-    $vars->{rss} ||= '/rss.xml';
-    $vars->{css_sha} ||= $css_sha
-        or die "No CSS sha yet??";
-    $vars->{site_title} ||= $site_title;
 
     return $hbs->render_string($template, $vars);
 }
@@ -174,53 +167,13 @@ sub date_dir {
 
 sub generate_css {
     my $output = `sha1sum static/style.css`;
-    ($css_sha) = $output =~ /^(\w+) /;
+    my ($css_sha) = $output =~ /^(\w+) /;
     die "Can't extract CSS sha from: $output" if !$css_sha;
 
     system("cp -r static/style.css $outdir/$css_sha.css");
+
+    return $css_sha;
 }
-
-generate_css();
-
-my %articles;
-
-while (my $file = glob("published/* writing/*")) {
-    my $draft = $file =~ m{^writing/};
-    my $content = read_content($file);
-    my $article = new_article($content, $file, $draft);
-    next if $article->{skip};
-
-    if ($draft) {
-        $article->{dir} = 'drafts/';
-    }
-    else {
-        $article->{dir} = date_dir($article->{date});
-    }
-
-    $article->{basename} ||= titleify($article->{title});
-    $article->{file} = $article->{dir} . $article->{basename} . '.html';
-    $article->{url} = $article->{external} || "/$article->{file}";
-
-    push @{ $articles{ $article->{date} } }, $article;
-}
-
-my @articles = map { @{ $articles{$_} } } reverse sort keys %articles;
-sub each_article (&) {
-    my $code = shift;
-
-    my @articles = grep { !$_->{draft} } @articles;
-    $code->($_) for @articles;
-}
-
-each_article {
-    my $article = shift;
-    generate_article($article);
-};
-
-generate_index();
-generate_drafts();
-generate_rss();
-generate_static();
 
 sub generate_article {
     my $article = shift;
@@ -245,13 +198,13 @@ sub generate_article {
 }
 
 sub generate_index {
+    my @articles = @{ shift() };
+    my %defaults = %{ shift() };
     my $posts;
     my $new_year;
 
-    each_article {
-        my $article = shift;
-
-        return if $article->{noindex};
+    for my $article (@articles) {
+        next if $article->{noindex} || $article->{draft};
 
         my $date = prettify_date($article->{date});
         my $sigil = $article->{external} ? ' <span class="external">⤴</span> ' : "";
@@ -273,7 +226,7 @@ sub generate_index {
     <span class="date">$date</span>
     <span class="title"><a href="$article->{url}">$title</a>$sigil</span>
 </li>];
-    };
+    }
 
     $posts = qq[<ul id="posts">$posts</ul>];
 
@@ -281,6 +234,7 @@ sub generate_index {
 
     open my $handle, '>', $file;
     print $handle encode_utf8(fill_in($layout{en}, {
+        %defaults,
         content     => $posts,
         title_tag   => $site,
         description => "The personal blog of Shawn M Moore, covering software engineering, game development, linguistics, productivity, learning, and more.",
@@ -289,6 +243,9 @@ sub generate_index {
 }
 
 sub generate_drafts {
+    my @articles = @{ shift() };
+    my %defaults = %{ shift() };
+
     my $posts = '';
     for my $article (grep { $_->{draft} } @articles) {
         generate_article($article);
@@ -311,29 +268,26 @@ sub generate_drafts {
 
     open my $handle, '>', "$outdir/drafts/index.html";
     print $handle fill_in($layout{en}, {
+        %defaults,
         content   => $posts,
         title_tag => $site,
     });
 }
 
 sub generate_rss {
-    require XML::RSS;
+    my @articles = @{ shift() };
 
+    require XML::RSS;
     my $feed = XML::RSS->new(version => '2.0');
     $feed->channel(
         title => $feed_title,
         link  => $base,
     );
 
-    my @articles;
+    @articles = sort { $b->{date} cmp $a->{date} }
+      grep { !$_->{noindex} && !$_->{draft} }
+      @articles;
 
-    each_article {
-        my $article = shift;
-        return if $article->{noindex};
-        push @articles, $article;
-    };
-
-    @articles = sort { $b->{date} cmp $a->{date} } @articles;
     splice @articles, 10;
 
     for my $article (@articles) {
@@ -355,7 +309,7 @@ sub generate_rss {
                 author  => 'Shawn M Moore',
             },
         );
-    };
+    }
 
     $feed->save("$outdir/rss.xml");
 }
@@ -363,3 +317,58 @@ sub generate_rss {
 sub generate_static {
     system("cp -r static/* $outdir/");
 }
+
+sub gather_files {
+  glob("published/* writing/*")
+}
+
+sub gather_articles {
+  my %defaults = %{ shift() };
+  my %articles;
+
+  for my $file (gather_files()) {
+      my $draft = $file =~ m{^writing/};
+      my $content = read_content($file);
+      my $article = new_article($content, $file, $draft, \%defaults);
+      next if $article->{skip};
+
+      if ($draft) {
+          $article->{dir} = 'drafts/';
+      }
+      else {
+          $article->{dir} = date_dir($article->{date});
+      }
+
+      $article->{basename} ||= titleify($article->{title});
+      $article->{file} = $article->{dir} . $article->{basename} . '.html';
+      $article->{url} = $article->{external} || "/$article->{file}";
+
+      push @{ $articles{ $article->{date} } }, $article;
+  }
+
+  return map { @{ $articles{$_} } } reverse sort keys %articles;
+}
+
+sub generate {
+  my $css_sha = generate_css();
+
+  my %defaults = (
+    rss => '/rss.xml',
+    css_sha => $css_sha,
+    site_title => $site_title,
+  );
+
+  my @articles = gather_articles(\%defaults);
+
+  for my $article (@articles) {
+      next if $article->{draft};
+      generate_article($article);
+  }
+
+  generate_index(\@articles, \%defaults);
+  generate_drafts(\@articles, \%defaults);
+  generate_rss(\@articles);
+  generate_static();
+}
+
+generate();
