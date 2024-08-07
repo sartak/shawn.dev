@@ -46,10 +46,41 @@ nav a:hover {
   text-decoration: none;
 }
 
+body.index #content {
+  padding-top: 4em;
+}
+
+body.index h2 {
+  font-size: 1rem;
+  font-weight: normal;
+}
+
+body.index ul {
+  list-style-type: none;
+}
+
+body.index #content ul+h2 {
+  margin-top: 2em;
+}
+
+body.index li {
+  margin-left: 1.5em;
+}
+
+body.index li+li {
+  margin-top: 0.8em;
+}
+
+body.index .subtitle {
+  font-size: 0.8em;
+  font-style: italic;
+}
+
 #content p,
 #content ul,
 #content pre,
 #content article h2,
+body.index h2,
 #content h3,
 #content h4,
 #content h5,
@@ -74,6 +105,7 @@ nav a:hover {
 #content p,
 #content ul,
 #content article h2,
+body.index h2,
 #content h3,
 #content h4,
 #content h5 {
@@ -105,17 +137,16 @@ nav a:hover {
   margin-bottom: 0.5em;
 }
 
-#content ul#posts {
-  margin-top: 4em;
-  list-style-type: none;
-}
-
 #content p code {
   padding: 4px;
   border-radius: 4px;
 }
 
 @media all and (max-width: 70em) {
+  body.index #content {
+    padding-top: 0;
+  }
+
   #date {
     display: none;
   }
@@ -140,14 +171,12 @@ nav a:hover {
 }
 
 @media all and (max-width: 47.826em) {
-  #content ul#posts {
-    margin-top: 2em;
-  }
 
   #content p,
   #content ul,
   #content pre,
   #content article h2,
+  body.index h2,
   #content h3,
   #content h4,
   #content h5,
@@ -208,39 +237,9 @@ nav img {
   border-radius: 7px;
 }
 
-#posts .title a {
-  font-size: 1.1em;
-  line-height: 1.2em;
-}
-
-#posts .subtitle {
-  font-size: 0.75em;
-  font-style: italic;
-}
-
-#posts .date,
-#posts .year {
-  display: none;
-}
-
-#posts .new-year .year {
-  display: block;
-  margin-left: -1.5em;
-  margin-top: 2.4em;
-  margin-bottom: 0.8em;
-}
-
-#posts li:first-child .year {
-  margin-top: 0;
-}
-
 #date {
   position: absolute;
   right: 2em;
-}
-
-#posts li {
-  padding-bottom: 0.8em;
 }
 
 #post h1,

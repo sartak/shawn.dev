@@ -202,35 +202,31 @@ sub generate_article {
 sub generate_index {
     my @articles = @{ shift() };
     my %defaults = %{ shift() };
-    my $posts;
-    my $new_year;
+    my %sections;
 
     for my $article (@articles) {
         next if $article->{noindex} || $article->{draft};
-
-        my $date = prettify_date($article->{date});
-        my $sigil = $article->{external} ? ' <span class="external">⤴</span> ' : "";
-        my $li_class = "";
-
         my ($year) = $article->{date} =~ /^(\d\d\d\d)-/;
-        if (!defined($new_year) || $year != $new_year) {
-            $li_class .= " new-year";
-        }
-        $new_year = $year;
-
-        my $title = $article->{title};
-        if ($article->{subtitle}) {
-          $title .= qq[ <span class="subtitle">($article->{subtitle})</span>];
-        }
-
-        $posts .= qq[<li class="$li_class">
-    <span class="year">$year</span>
-    <span class="date">$date</span>
-    <span class="title"><a href="$article->{url}">$title</a>$sigil</span>
-</li>];
+        push @{ $sections{$year} }, $article;
     }
 
-    $posts = qq[<ul id="posts">$posts</ul>];
+    my $posts;
+    for my $section (reverse sort keys %sections) {
+      $posts .= qq[<h2>$section</h2>\n];
+      $posts .= qq[<ul>\n];
+
+      for my $article (@{ $sections{$section} }) {
+          my $date = prettify_date($article->{date});
+          my $sigil = $article->{external} ? ' <span class="external">⤴</span> ' : "";
+          my $title = $article->{title};
+          if ($article->{subtitle}) {
+            $title .= qq[ <span class="subtitle">($article->{subtitle})</span>];
+          }
+
+          $posts .= qq[<li><span class="title"><a href="$article->{url}">$title</a>$sigil</span></li>\n];
+      }
+      $posts .= qq[</ul>\n];
+    }
 
     my $file = "$outdir/index.html";
 
@@ -241,6 +237,7 @@ sub generate_index {
         title_tag   => $site,
         description => "The personal blog of Shawn M Moore, covering software engineering, game development, linguistics, productivity, learning, and more.",
         index       => 1,
+        bodyClass   => "index",
     }));
 }
 
@@ -273,6 +270,7 @@ sub generate_drafts {
         %defaults,
         content   => $posts,
         title_tag => $site,
+        bodyClass => "index",
     });
 }
 
