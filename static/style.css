@@ -55,8 +55,17 @@ body.index h2 {
   font-weight: normal;
 }
 
+body.index h3 {
+  font-size: 0.9rem;
+  font-weight: normal;
+}
+
 body.index ul {
   list-style-type: none;
+}
+
+body.index #content ul+h3 {
+  margin-top: 1em;
 }
 
 body.index #content ul+h2 {

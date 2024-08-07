@@ -206,26 +206,35 @@ sub generate_index {
 
     for my $article (@articles) {
         next if $article->{noindex} || $article->{draft};
-        my ($year) = $article->{date} =~ /^(\d\d\d\d)-/;
-        push @{ $sections{$year} }, $article;
+        my ($year, $month) = $article->{date} =~ /^(\d\d\d\d)-(\d\d)-/;
+        push @{ $sections{$year}[0]{$month}[0] }, $article;
+        $sections{$year}[1] = $year;
+        $sections{$year}[2]++;
+        $sections{$year}[0]{$month}[1] = $months[$month];
     }
 
     my $posts;
     for my $section (reverse sort keys %sections) {
-      $posts .= qq[<h2>$section</h2>\n];
-      $posts .= qq[<ul>\n];
+      my ($subsections, $label, $total) = @{ $sections{$section} };
+      $posts .= qq[<h2>$label</h2>\n];
 
-      for my $article (@{ $sections{$section} }) {
-          my $date = prettify_date($article->{date});
-          my $sigil = $article->{external} ? ' <span class="external">⤴</span> ' : "";
-          my $title = $article->{title};
-          if ($article->{subtitle}) {
-            $title .= qq[ <span class="subtitle">($article->{subtitle})</span>];
-          }
+      for my $subsection (reverse sort keys %$subsections) {
+        my ($articles, $label) = @{ $subsections->{$subsection} };
+        $posts .= qq[<h3>$label</h3>\n] if $total > 3;
 
-          $posts .= qq[<li><span class="title"><a href="$article->{url}">$title</a>$sigil</span></li>\n];
+        $posts .= qq[<ul>\n];
+        for my $article (@$articles) {
+            my $date = prettify_date($article->{date});
+            my $sigil = $article->{external} ? ' <span class="external">⤴</span> ' : "";
+            my $title = $article->{title};
+            if ($article->{subtitle}) {
+              $title .= qq[ <span class="subtitle">($article->{subtitle})</span>];
+            }
+
+            $posts .= qq[<li><span class="title"><a href="$article->{url}">$title</a>$sigil</span></li>\n];
+        }
+        $posts .= qq[</ul>\n];
       }
-      $posts .= qq[</ul>\n];
     }
 
     my $file = "$outdir/index.html";
