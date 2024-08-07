@@ -2,7 +2,6 @@ title: Boids of Prey
 subtitle: my Ludum Dare 46 game
 description: Keep the flock alive! Unlock the dash and stun attacks to teach those ghosts some manners. Just don’t miss and hit the chickens instead…
 date: 2020-04-21
-bodyClass: natural
 @styles: /boids-of-prey/static/css/main.f58af37a.chunk.css
 @scripts: /boids-of-prey/static/wrapper.js
 @scripts: /boids-of-prey/static/js/2.ca810ec6.chunk.js

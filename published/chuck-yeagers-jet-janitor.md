@@ -2,7 +2,6 @@ title: Chuck Yeager's Jet Janitor
 subtitle: my Ludum Dare 48 game
 description: What if Luftrausers plus shuffleboard? That's right, it's... CHUCK YEAGER'S JET JANITOR 🛩️🧹
 date: 2021-06-05
-bodyClass: natural
 @styles: /jet-janitor/static/css/main.278923f8.chunk.css
 @scripts: /jet-janitor/static/wrapper.js
 @scripts: /jet-janitor/static/js/2.de734b85.chunk.js
