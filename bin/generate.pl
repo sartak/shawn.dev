@@ -308,6 +308,8 @@ sub generate_rss {
         my $description = decode_utf8($article->{original} || $article->{description});
         $description =~ s!\bloading…!(This bit of content likely won't show up in your reader, please visit the <a href="$article->{url}">article</a> in your browser.)!g;
 
+        $description =~ s{<div id="feed-break">(.+?)</div>.+}{<p>$1</p>}ms;
+
         $feed->add_item(
             title       => decode_utf8($title),
             link        => $article->{url},
