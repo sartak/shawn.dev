@@ -353,6 +353,8 @@ sub gather_articles {
       $article->{file} = $article->{dir} . $article->{basename} . '.html';
       $article->{url} = $article->{external} || "/$article->{file}";
 
+      s!%URL%!$base$article->{url}!g for $article->{content}, $article->{original};
+
       push @{ $articles{ $article->{date} } }, $article;
   }
 
