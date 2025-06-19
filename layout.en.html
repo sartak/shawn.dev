@@ -1,56 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>{{title_tag}}</title>
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="/{{css_sha}}.css" type="text/css" />
-    {{#each styles}}
-    <link rel="stylesheet" href="{{this}}" type="text/css" />
-    {{/each}}
+  <title>{{title_tag}}</title>
 
-    <meta name="theme-color" content="#EFEFFF" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#1C1D25" media="(prefers-color-scheme: dark)">
+  <link rel="stylesheet" href="/{{css_sha}}.css" type="text/css" />
+  {{#each styles}}
+  <link rel="stylesheet" href="{{this}}" type="text/css" />
+  {{/each}}
 
-    {{#if description}}
-    <meta name="description" content="{{description}}" />
-    {{/if}}
+  <meta name="theme-color" content="#EFEFFF" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1C1D25" media="(prefers-color-scheme: dark)">
 
-    <link
-      rel="alternate"
-      type="application/rss+xml"
-      title="RSS"
-      href="{{rss}}"
-    />
+  {{#if description}}
+  <meta name="description" content="{{description}}" />
+  {{/if}}
 
-    {{#each scripts}}
-    <script src="{{this}}" defer></script>
-    {{/each}}
-  </head>
-  <body class="{{bodyClass}}">
-    <script>
-      var ua = navigator.userAgent.toLowerCase();
-      if (ua.indexOf("safari") != -1) {
-        if (ua.indexOf("chrome") > -1) {
-          document.body.classList.add("chrome");
-        } else {
-          document.body.classList.add("safari");
-        }
+  {{#if og_title}}
+  <meta property="og:title" content="{{og_title}}" />
+  {{/if}}
+
+  <meta property="og:site_name" content="shawn.dev" />
+
+  {{#if og_image}}
+  <meta property="og:image" content="{{og_image}}" / {{/if}} <link rel="alternate" type="application/rss+xml"
+    title="RSS" href="{{rss}}" />
+
+  {{#each scripts}}
+  <script src="{{this}}" defer></script>
+  {{/each}}
+</head>
+
+<body class="{{bodyClass}}">
+  <script>
+    var ua = navigator.userAgent.toLowerCase();
+    if (ua.indexOf("safari") != -1) {
+      if (ua.indexOf("chrome") > -1) {
+        document.body.classList.add("chrome");
+      } else {
+        document.body.classList.add("safari");
       }
-    </script>
-    <nav>
-      <a href="/" aria-label="homepage"
-        ><img
-          alt="avatar"
-          aria-hidden="true"
-          height="100"
-          width="100"
-          src="/img/avatar-200x200.jpg"
-      /></a>
-      <h1><a href="/">{{site_title}}</a></h1>
-    </nav>
-    <div id="content">{{{content}}}</div>
-  </body>
+    }
+  </script>
+  <nav>
+    <a href="/" aria-label="homepage"><img alt="avatar" aria-hidden="true" height="100" width="100"
+        src="/img/avatar-200x200.jpg" /></a>
+    <h1><a href="/">{{site_title}}</a></h1>
+  </nav>
+  <div id="content">{{{content}}}</div>
+</body>
+
 </html>
