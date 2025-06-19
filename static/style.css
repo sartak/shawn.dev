@@ -132,6 +132,7 @@ body.index h2,
 #content pre {
   padding: 1em;
   overflow-x: auto;
+  box-sizing: border-box;
 }
 
 #content pre,
