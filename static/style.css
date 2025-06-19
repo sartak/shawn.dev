@@ -5,7 +5,8 @@ body {
   hanging-punctuation: first allow-end last;
 }
 
-pre, code {
+pre,
+code {
   font-family: "Menlo", "DejaVu Sans Mono", "Consolas", monospace;
   font-size: 0.9rem;
 }
@@ -331,6 +332,10 @@ pre,
 p code,
 img {
   background: rgb(229, 229, 245);
+}
+
+strong {
+  font-weight: 600;
 }
 
 @media (prefers-color-scheme: dark) {
